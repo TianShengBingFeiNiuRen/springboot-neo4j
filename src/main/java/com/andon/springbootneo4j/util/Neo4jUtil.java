@@ -1,6 +1,5 @@
 package com.andon.springbootneo4j.util;
 
-import org.neo4j.driver.Value;
 import org.neo4j.driver.internal.value.PathValue;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Path;
@@ -35,7 +34,6 @@ public class Neo4jUtil {
                 Map<String, Object> map = new HashMap<>();
                 map.put("id_node", node.id());
                 name_fields.forEach((name_field) -> {
-                    Value value = node.get(name_field);
                     if (node.containsKey(name_field))
                         map.put(name_field, node.get(name_field).toString());
                 });
