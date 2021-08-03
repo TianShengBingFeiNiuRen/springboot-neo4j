@@ -1,0 +1,9 @@
+server:
+  port: 8888
+
+spring:
+  neo4j:
+    uri: bolt://####:7687
+    authentication:
+      username: ####
+      password: ####
