@@ -15,9 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Andon
@@ -34,6 +32,17 @@ public class DatabaseTest {
     private NodeLocationRepository nodeLocationRepository;
     @Resource
     private RelationFriendRepository relationFriendRepository;
+
+    @Test
+    public void test07() {
+        List<Object> test = relationFriendRepository.test();
+        List<Map<String, Object>> nodeLocationList = Neo4jUtil.getNodeList(test, NodeLocation.class);
+        List<Map<String, Object>> nodePersonList = Neo4jUtil.getNodeList(test, NodePerson.class);
+        List<Map<String, Object>> relationFriendMapList = Neo4jUtil.getRelationList(test, RelationFriend.class);
+        log.info("nodeLocationList:{}", JSONObject.toJSONString(nodeLocationList));
+        log.info("nodePersonList:{}", JSONObject.toJSONString(nodePersonList));
+        log.info("relationFriendMapList:{}", JSONObject.toJSONString(relationFriendMapList));
+    }
 
     @Test
     public void test06() {

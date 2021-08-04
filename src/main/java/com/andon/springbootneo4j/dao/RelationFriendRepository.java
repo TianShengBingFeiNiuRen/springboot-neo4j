@@ -16,4 +16,7 @@ public interface RelationFriendRepository extends Neo4jRepository<RelationFriend
 
     @Query(value = "MATCH relation=(p1:person)-[r:friend]->(p2:person) WHERE r.value=$value RETURN relation")
     List<Object> matchFriendWhereValue(String value);
+
+    @Query(value = "MATCH data=(p)-[*1..3]-(p2) WHERE p.name='关羽' RETURN data")
+    List<Object> test();
 }
