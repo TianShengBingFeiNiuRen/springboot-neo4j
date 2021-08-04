@@ -16,6 +16,7 @@ import java.util.Map;
  * @author Andon
  * 2021/8/3
  */
+@SuppressWarnings("DuplicatedCode")
 public class Neo4jUtil {
 
     /**
