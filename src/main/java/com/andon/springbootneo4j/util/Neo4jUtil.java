@@ -67,9 +67,8 @@ public class Neo4jUtil {
                 map.put("startNodeId", relationship.startNodeId());
                 map.put("endNodeId", relationship.endNodeId());
                 name_fields.forEach((name_field) -> {
-                    if (relationship.containsKey(name_field)) {
+                    if (relationship.containsKey(name_field))
                         map.put(name_field, relationship.get(name_field).asObject());
-                    }
                 });
                 maps.add(map);
             });
