@@ -35,7 +35,7 @@ public class Neo4jUtil {
                 map.put("id_node", node.id());
                 name_fields.forEach((name_field) -> {
                     if (node.containsKey(name_field))
-                        map.put(name_field, node.get(name_field).toString());
+                        map.put(name_field, node.get(name_field).asObject());
                 });
                 List<String> label_list = new ArrayList<>();
                 Iterable<String> labels = node.labels();
@@ -67,8 +67,9 @@ public class Neo4jUtil {
                 map.put("startNodeId", relationship.startNodeId());
                 map.put("endNodeId", relationship.endNodeId());
                 name_fields.forEach((name_field) -> {
-                    if (relationship.containsKey(name_field))
-                        map.put(name_field, relationship.get(name_field).toString());
+                    if (relationship.containsKey(name_field)) {
+                        map.put(name_field, relationship.get(name_field).asObject());
+                    }
                 });
                 maps.add(map);
             });
