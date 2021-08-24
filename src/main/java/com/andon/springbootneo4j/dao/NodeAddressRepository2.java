@@ -14,7 +14,7 @@ public interface NodeAddressRepository2 extends Neo4jRepository<NodeAddress2, Lo
 
     @Query(value = "MATCH data=(a)-[t]->(a2) " +
             "WHERE a.hash=$hash AND t.coin=$coin AND t.amount>=$amount AND t.timestamp>=$timestampStart AND t.timestamp<=$timestampEnd " +
-            "RETURN COUNT(a2.hash)")
+            "RETURN COUNT(DISTINCT a.hash) + COUNT(DISTINCT a2.hash)")
     int matchAddressLayer1Count(String hash, String coin, double amount, long timestampStart, long timestampEnd);
 
     @Query(value = "MATCH data=(a)-[t]->(a2)-[t2]->(a3) " +
