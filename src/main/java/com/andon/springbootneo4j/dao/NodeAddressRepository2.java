@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NodeAddressRepository2 extends Neo4jRepository<NodeAddress2, Long> {
 
-    @Query(value = "MATCH data=(a)-[t]->(a2) " +
+    @Query(value = "MATCH data=(a:Address)-[t]->(a2:Address) " +
             "WHERE a.hash=$hash AND t.coin=$coin AND t.amount>=$amount AND t.timestamp>=$timestampStart AND t.timestamp<=$timestampEnd " +
             "RETURN COUNT(DISTINCT a.hash) + COUNT(DISTINCT a2.hash)")
     int matchAddressLayer1Count(String hash, String coin, double amount, long timestampStart, long timestampEnd);
