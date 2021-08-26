@@ -5,8 +5,10 @@ import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Path;
 import org.neo4j.driver.types.Relationship;
 import org.springframework.util.ObjectUtils;
+import sun.misc.BASE64Encoder;
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,34 @@ import java.util.Map;
  */
 @SuppressWarnings("DuplicatedCode")
 public class Neo4jUtil {
+
+    public static String url = "http://####:7474/db/data/transaction/commit"; //ip,port
+
+    // rest调用neo4j
+    public static String cqlToNeo4j(String cql) {
+        String response = null;
+        try {
+            Map<String, String> header = new HashMap<>();
+            Map<String, Object> param = new HashMap<>();
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            String text = "###:###"; //"用户名:密码"
+            byte[] textByte = text.getBytes(StandardCharsets.UTF_8);
+            String encodedText = encoder.encode(textByte);
+            header.put("Authorization", "Basic " + encodedText);
+
+            List<Map<String, String>> statements = new ArrayList<>();
+            Map<String, String> statement = new HashMap<>();
+            statement.put("statement", cql);
+            statements.add(statement);
+            param.put("statements", statements);
+
+            response = HttpClientUtil.doPostJson(url, header, param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 
     /**
      * 解析 PathValue 转节点

@@ -1,5 +1,6 @@
 package com.andon.springbootneo4j;
 
+import com.andon.springbootneo4j.util.Neo4jUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -12,6 +13,13 @@ import java.util.List;
  */
 @Slf4j
 public class Demo {
+
+    @Test
+    public void test02(){
+        String cql = "MATCH (n) RETURN COUNT(n)";
+        String response = Neo4jUtil.cqlToNeo4j(cql);
+        log.info("response:{}", response);
+    }
 
     @Test
     public void test01() {
